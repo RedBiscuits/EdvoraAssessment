@@ -89,11 +89,11 @@
                 android:layout_gravity="center"
                 android:background="@color/colorSecondary"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
 
+                app:layout_constraintTop_toTopOf="parent"
                 app:tabIndicatorColor="@color/colorOnPrimary"
-                app:tabTextColor="@color/colorOnPrimary"
-                tools:layout_editor_absoluteX="109dp" />
+                app:tabTextColor="@color/colorOnPrimary" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

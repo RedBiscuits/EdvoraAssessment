@@ -9,10 +9,10 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.datastructures.edvoraassessment.R
-import com.datastructures.edvoraassessment.models.RidesModel
+import com.datastructures.edvoraassessment.models.RidesModelItem
 import com.google.android.material.imageview.ShapeableImageView
 
-class RideListAdapter(private var ridesArray: ArrayList<RidesModel>) : RecyclerView.Adapter<RideListAdapter.RideViewHolder>(){
+class RideListAdapter(private var ridesArray: ArrayList<RidesModelItem>) : RecyclerView.Adapter<RideListAdapter.RideViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RideViewHolder {
         return RideViewHolder(LayoutInflater
@@ -24,14 +24,14 @@ class RideListAdapter(private var ridesArray: ArrayList<RidesModel>) : RecyclerV
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: RideViewHolder, position: Int) {
-        holder.cityNameTV.text = ridesArray[position].getCity()
-        holder.rideIdTV.text = ridesArray[position].getId().toString()
-        holder.dateTv.text = ridesArray[position].getDate()
-        holder.stateNameTV.text = ridesArray[position].getState()
-        holder.originStationTv.text = ridesArray[position].getOrigin_station_code().toString()
-        holder.distanceTV.text = ridesArray[position].getDistance().toString()
-        holder.pathArrayTv.text = ridesArray[position].getStation_path().contentToString()
-        Glide.with(holder.itemView.context).load(ridesArray[position].getMap_url().toString()).into(holder.mapImage)
+        holder.cityNameTV.text = ridesArray[position].city
+        holder.rideIdTV.text = ridesArray[position].id.toString()
+        holder.dateTv.text = ridesArray[position].date
+        holder.stateNameTV.text = ridesArray[position].state
+        holder.originStationTv.text = ridesArray[position].origin_station_code.toString()
+        holder.distanceTV.text = ridesArray[position].distance.toString()
+        holder.pathArrayTv.text = ridesArray[position].station_path.toString()
+        Glide.with(holder.itemView.context).load(ridesArray[position].map_url.toString()).into(holder.mapImage)
 
     }
 
