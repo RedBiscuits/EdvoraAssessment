@@ -9,5 +9,5 @@ data class RidesModelItem(
     val origin_station_code: Int,
     val state: String,
     val station_path: ArrayList<Int>,
-    val distance: Int = 0
+    var distance: Int = 0
 )

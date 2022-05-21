@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.getRides()
         viewModel.getUser()
 
         val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
@@ -42,8 +41,8 @@ class MainActivity : AppCompatActivity() {
         viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = binding.tabs
         tabs.setupWithViewPager(viewPager)
-        initOptions()
         initUser()
+        initOptions()
 
 
     }
@@ -81,10 +80,11 @@ class MainActivity : AppCompatActivity() {
     private fun initUser(){
 
         viewModel.mutableUserLiveData.observe(this) {
-            user = it
-            Log.d("USER :::","Success")
-            user_name.text = user.getName()
-            Glide.with(applicationContext).load(user.getUrl()).into(user_image)
+            viewModel.getRides(it.getStationCode())
+            Log.d("USER :::",it.getStationCode().toString())
+            user_name.text = it.getName()
+            Glide.with(applicationContext).load(it.getUrl()).into(user_image)
+
         }
 
     }

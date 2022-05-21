@@ -30,12 +30,13 @@ class MainFragment : Fragment() {
         val ridesViewModel = ViewModelProvider(requireActivity())[ViewModel::class.java]
         ridesViewModel.mutableRidesLiveData.observe(viewLifecycleOwner) {
             ridesArrayList = it
+
             val adapter  = RideListAdapter(it)
             recyclerView.adapter = adapter
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
         }
         ridesViewModel.mutableFilteredRidesLiveData.observe(viewLifecycleOwner) {
-            ridesArrayList = it as RidesModel
+
             val adapter  = RideListAdapter(it)
             recyclerView.adapter = adapter
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
