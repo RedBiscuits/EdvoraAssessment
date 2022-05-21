@@ -34,6 +34,13 @@ class MainFragment : Fragment() {
             recyclerView.adapter = adapter
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
         }
+        ridesViewModel.mutableFilteredRidesLiveData.observe(viewLifecycleOwner) {
+            ridesArrayList = it as RidesModel
+            val adapter  = RideListAdapter(it)
+            recyclerView.adapter = adapter
+            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        }
+
 
     }
 

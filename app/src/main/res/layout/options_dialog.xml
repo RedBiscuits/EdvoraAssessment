@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary"
+    android:padding="@dimen/_25sdp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/sectionHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:textSize="@dimen/_20ssp"
+        android:lines="1"
+        android:maxLines="2"
+        android:text="Filters"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white"
+        android:layout_marginBottom="@dimen/_9sdp"
+
+        />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+        android:background="@color/colorPrimary"
+        app:boxCornerRadiusBottomEnd="@dimen/_9sdp"
+        app:boxCornerRadiusBottomStart="@dimen/_9sdp"
+        app:boxCornerRadiusTopEnd="@dimen/_9sdp"
+        app:boxCornerRadiusTopStart="@dimen/_9sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginBottom="@dimen/_9sdp"
+        app:hintTextColor="@color/colorOnSecondary"
+        android:textColorHint="@color/colorOnSecondary"
+        app:boxBackgroundColor="@color/colorSecondary"
+        >
+        <AutoCompleteTextView
+            android:id="@+id/cities_filter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:inputType="none"
+            android:hint="City"
+            android:background="@color/colorSecondary"
+            android:textColor="@color/colorOnSecondary"
+            android:textColorHint="@color/colorOnSecondary"
+
+            />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:background="@color/colorPrimary"
+        app:counterTextColor="@color/colorOnSecondary"
+        android:textColorHint="@color/colorOnSecondary"
+        app:boxBackgroundColor="@color/colorSecondary"
+        app:boxCornerRadiusBottomEnd="@dimen/_9sdp"
+        app:boxCornerRadiusBottomStart="@dimen/_9sdp"
+        app:boxCornerRadiusTopEnd="@dimen/_9sdp"
+        app:boxCornerRadiusTopStart="@dimen/_9sdp"
+        app:hintTextColor="@color/colorOnSecondary"
+
+        >
+        <AutoCompleteTextView
+            android:id="@+id/states_filter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:inputType="none"
+            android:hint="State"
+            android:background="@color/colorSecondary"
+            android:textColor="@color/colorOnSecondary"
+            />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+</LinearLayout>
