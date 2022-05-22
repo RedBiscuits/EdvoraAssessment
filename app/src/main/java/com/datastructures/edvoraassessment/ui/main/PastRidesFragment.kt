@@ -1,6 +1,7 @@
 package com.datastructures.edvoraassessment.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +12,7 @@ import com.datastructures.edvoraassessment.R
 import com.datastructures.edvoraassessment.adapters.RideListAdapter
 import kotlinx.android.synthetic.main.fragment_main.*
 
-
-class MainFragment : Fragment() {
+class PastRidesFragment:Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,9 +25,9 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val ridesViewModel = ViewModelProvider(requireActivity())[ViewModel::class.java]
 
-        ridesViewModel.mutableRidesLiveData.observe(viewLifecycleOwner) {
+        ridesViewModel.mutablePastRidesLiveData.observe(viewLifecycleOwner) {
 
-            val adapter  = RideListAdapter(it!!)
+            val adapter  = RideListAdapter(it)
             recyclerView.adapter = adapter
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
         }
@@ -40,8 +40,6 @@ class MainFragment : Fragment() {
 
 
     }
-
-
 
 
 }

@@ -3,8 +3,7 @@ package com.datastructures.edvoraassessment.ui.main
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
+import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
@@ -14,7 +13,6 @@ import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.datastructures.edvoraassessment.R
 import com.datastructures.edvoraassessment.databinding.ActivityMainBinding
-import com.datastructures.edvoraassessment.models.UserModel
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.options_dialog.view.*
@@ -23,7 +21,6 @@ import kotlinx.android.synthetic.main.options_dialog.view.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var user :UserModel
 
     private val viewModel by lazy {
          ViewModelProvider(this)[ViewModel::class.java]
@@ -59,9 +56,19 @@ class MainActivity : AppCompatActivity() {
             val dialogView = LayoutInflater.from(this).inflate(R.layout.options_dialog,null)
             val builder =AlertDialog.Builder(this)
                 .setView(dialogView)
+                .create()
+
+            builder.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            val layoutParams: WindowManager.LayoutParams = builder.window!!.attributes
+
+            layoutParams.gravity = Gravity.TOP or Gravity.LEFT
+            layoutParams.x = 100 //x position
+
+            layoutParams.y = 100 //y position
 
 
-            val alertDialog = builder.show()
+            builder.show()
+
             dialogView.cities_filter.setAdapter(citiesArrayAdapter)
             dialogView.states_filter.setAdapter(statesArrayAdapter)
 

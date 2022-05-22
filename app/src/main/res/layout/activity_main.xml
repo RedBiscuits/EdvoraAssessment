@@ -24,7 +24,7 @@
                 android:gravity="center"
                 android:minHeight="?actionBarSize"
                 android:padding="@dimen/appbar_padding"
-                android:text="Edvora"
+                android:text="@string/edvora"
                 android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
                 android:textColor="@color/colorOnPrimary"
                 android:textSize="@dimen/_26ssp"
@@ -40,7 +40,7 @@
                 android:gravity="center"
                 android:minHeight="?actionBarSize"
                 android:layout_marginEnd="@dimen/_20sdp"
-                android:text="Edvora"
+                android:text="@string/edvora"
                 android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
                 android:textColor="@color/colorOnPrimary"
                 android:textSize="@dimen/_13ssp"
@@ -59,35 +59,38 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorSecondary"
             android:layout_marginTop="0dp"
-
+            android:orientation="horizontal"
             >
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                android:text="Rides"
-                android:textColor="@color/colorOnPrimary"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_marginStart="4dp"
+                android:layout_gravity="center"
+                android:text="@string/rides"
+                android:textColor="#ABABAB"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabs"
                 android:layout_width="@dimen/_190sdp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_weight="3"
                 android:background="@color/colorSecondary"
-
+                app:tabGravity="start"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/options"
                 app:layout_constraintStart_toEndOf="@+id/textView"
@@ -96,20 +99,39 @@
                 app:tabIndicatorColor="@color/colorOnPrimary"
                 app:tabTextColor="@color/colorOnPrimary" />
 
-            <Button
+            <LinearLayout
                 android:id="@+id/options"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:orientation="horizontal"
+                android:backgroundTint="@color/colorSecondary"
+                android:elevation="0dp"
+                android:padding="0dp"
+                android:drawablePadding="0dp"
+                android:layout_gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:text="Filters"
-                android:drawableLeft="@drawable/sort_vector"
-                android:backgroundTint="@color/colorSecondary"
-                />
+                app:layout_constraintTop_toTopOf="parent" >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:src="@drawable/sort_vector"
+                    android:contentDescription="@string/filters" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filters"
+                    android:layout_gravity="center"
+                    android:textColor="@color/colorOnPrimary"
+                    android:textSize="@dimen/_14ssp"
+                    />
+            </LinearLayout>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager

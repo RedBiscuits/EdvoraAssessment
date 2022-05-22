@@ -1,6 +1,5 @@
 package com.datastructures.edvoraassessment.ui.main
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,15 +7,21 @@ import com.datastructures.edvoraassessment.models.RidesModel
 import com.datastructures.edvoraassessment.models.RidesModelItem
 import com.datastructures.edvoraassessment.models.UserModel
 import kotlinx.coroutines.launch
-import java.lang.Math.abs
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class ViewModel : ViewModel() {
-     var mutableRidesLiveData : MutableLiveData<RidesModel> = MutableLiveData()
+    var mutableRidesLiveData : MutableLiveData<RidesModel?> = MutableLiveData()
+    var mutablePastRidesLiveData : MutableLiveData<ArrayList<RidesModelItem>> = MutableLiveData()
+    var mutableUpcomingRidesLiveData : MutableLiveData<ArrayList<RidesModelItem>> = MutableLiveData()
+
     fun getRides(distance : Int){
         viewModelScope.launch{
-            Log.d("hoho" , "arr.toString()")
-            var arr =ApiResponse.apiInterface.getRide().body()
-            for ( i in arr!!){
+            val rides =ApiResponse.apiInterface.getRide().body()
+            val formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a")
+            val currentDate = LocalDate.parse("03/16/2022 10:50 PM", formatter)
+
+            for ( i in rides!!){
                 i.distance = kotlin.math.abs(
                     binarySearchClosest(
                         i.station_path,
@@ -24,10 +29,22 @@ class ViewModel : ViewModel() {
                         distance
                     ) - distance
                 )
+                LocalDate.parse(i.date, formatter)
+
             }
-            Log.d("hoho" , arr.toString())
-            arr.sortBy { it.distance }
-            mutableRidesLiveData.value = arr!!
+            val pastRides : ArrayList<RidesModelItem> = rides.filter {
+                val itDate = LocalDate.parse(it.date , formatter)
+                itDate.isBefore(currentDate)
+            } as ArrayList<RidesModelItem>
+
+            val upcomingRides : ArrayList<RidesModelItem> = rides.filter {
+                val itDate = LocalDate.parse(it.date , formatter)
+                itDate.isAfter(currentDate)
+            } as ArrayList<RidesModelItem>
+
+            mutableRidesLiveData.value = rides
+            mutablePastRidesLiveData.value = pastRides
+            mutableUpcomingRidesLiveData.value = upcomingRides
         }
     }
      var mutableUserLiveData: MutableLiveData<UserModel> = MutableLiveData()
@@ -41,19 +58,23 @@ class ViewModel : ViewModel() {
     fun getFilteredRides(filter : String , determinant : String , secondFilter : String? = "") {
         var rides = mutableRidesLiveData.value as ArrayList<RidesModelItem>
         if(filter != ""){
-        if (determinant == "state"){
-            rides = rides!!.filter {
-                it.state == filter
-            } as ArrayList<RidesModelItem>
-        } else if (determinant == "city"){
-            rides = rides!!.filter {
-                it.city == filter
-            } as ArrayList<RidesModelItem>
-        } else if (determinant == "state_city"){
-            rides = rides!!.filter {
-                it.state == filter && it.city ==secondFilter
-            } as ArrayList<RidesModelItem>
-        }
+            when (determinant) {
+                "state" -> {
+                    rides = rides.filter {
+                        it.state == filter
+                    } as ArrayList<RidesModelItem>
+                }
+                "city" -> {
+                    rides = rides.filter {
+                        it.city == filter
+                    } as ArrayList<RidesModelItem>
+                }
+                "state_city" -> {
+                    rides = rides.filter {
+                        it.state == filter && it.city ==secondFilter
+                    } as ArrayList<RidesModelItem>
+                }
+            }
         }
         mutableFilteredRidesLiveData.value = rides
     }
@@ -66,7 +87,7 @@ class ViewModel : ViewModel() {
 
 
 
-    fun binarySearchClosest(arr: ArrayList<Int>, n: Int, target: Int): Int {
+    private fun binarySearchClosest(arr: ArrayList<Int>, n: Int, target: Int): Int {
         if (target <= arr[0]) return arr[0]
         if (target >= arr[n - 1]) return arr[n - 1]
 
@@ -101,7 +122,7 @@ class ViewModel : ViewModel() {
     }
 
 
-    fun getClosest(val1: Int, val2: Int, target: Int): Int {
+    private fun getClosest(val1: Int, val2: Int, target: Int): Int {
         return if (target - val1 >= val2 - target) val2 else val1
     }
 

@@ -15,12 +15,7 @@ class UserModel {
         return station_code
     }
 
-    constructor(station_code: Int, name: String?, url: String?) {
-        this.station_code = station_code
-        this.name = name
-        this.url = url
-    }
-    constructor() {
+    init {
         this.station_code = 0
         this.name = "edvora"
         this.url = "https://picsum.photos/200"
